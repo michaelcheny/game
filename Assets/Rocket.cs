@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    // get ref to rigit body
+    // get ref to rigid body
     Rigidbody rigidbody;
     // get ref to the audio source
     AudioSource audioSource;
@@ -26,7 +26,25 @@ public class Rocket : MonoBehaviour
         Rotate();
     }
 
-    private void Thrust(){
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("friendly game object collided");   
+                break;
+            // case "Enemy":
+            //     audioSource.Play();
+            //     Destroy(gameObject);
+            default:
+                // audioSource.Play();
+                Destroy(gameObject);
+                break;
+        }
+    }
+
+    private void Thrust()
+    {
         if (Input.GetKey(KeyCode.Space)) {
             rigidbody.AddRelativeForce(Vector3.up * mainThrust);
             if (!audioSource.isPlaying){
@@ -35,10 +53,10 @@ public class Rocket : MonoBehaviour
         } else {
             audioSource.Stop();
         }
-        
     }
-    private void Rotate(){
 
+    private void Rotate()
+    {
         rigidbody.freezeRotation = true; // manual control of rotation
         float rotationThisFrame = rcsThrust * Time.deltaTime;
         
