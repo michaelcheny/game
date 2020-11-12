@@ -9,7 +9,7 @@ public class Rocket : MonoBehaviour
     // get ref to the audio source
     AudioSource audioSource;
 
-    [SerializeField] float rcsThrust = 250f;
+    [SerializeField] float rcsThrust = 200f;
     [SerializeField] float mainThrust = 35f;
 
     // Start is called before the first frame update
@@ -24,6 +24,7 @@ public class Rocket : MonoBehaviour
     {
         Thrust();
         Rotate();
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -33,11 +34,16 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 print("friendly game object collided");   
                 break;
-            // case "Enemy":
-            //     audioSource.Play();
-            //     Destroy(gameObject);
+            case "Obstacle":
+                audioSource.Play();
+                Destroy(gameObject);
+                break;
+            case "Finish":
+                print("Victory!");
+                break;
             default:
                 // audioSource.Play();
+                print("dead");
                 Destroy(gameObject);
                 break;
         }
