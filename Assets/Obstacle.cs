@@ -8,7 +8,7 @@ public class Obstacle : MonoBehaviour
     //adjust this to change speed
     [SerializeField] float speed = 5f;
     //adjust this to change how high it goes
-    [SerializeField] float height = 0.5f;
+    [SerializeField] float height = 1f;
 
     Vector3 pos;
 

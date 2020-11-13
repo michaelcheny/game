@@ -32,7 +32,7 @@ public class Rocket : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Friendly":
-                print("friendly game object collided");   
+                print("friendly game object collided");
                 break;
             case "Obstacle":
                 audioSource.Play();
@@ -51,12 +51,16 @@ public class Rocket : MonoBehaviour
 
     private void Thrust()
     {
-        if (Input.GetKey(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.Space))
+        {
             rigidbody.AddRelativeForce(Vector3.up * mainThrust);
-            if (!audioSource.isPlaying){
-            audioSource.Play();
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
             }
-        } else {
+        }
+        else
+        {
             audioSource.Stop();
         }
     }
@@ -65,10 +69,13 @@ public class Rocket : MonoBehaviour
     {
         rigidbody.freezeRotation = true; // manual control of rotation
         float rotationThisFrame = rcsThrust * Time.deltaTime;
-        
-        if (Input.GetKey(KeyCode.A)) {
+
+        if (Input.GetKey(KeyCode.A))
+        {
             transform.Rotate(Vector3.forward * rotationThisFrame);
-        } else if (Input.GetKey(KeyCode.D)){
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
 
